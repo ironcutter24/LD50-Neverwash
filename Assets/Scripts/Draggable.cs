@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
-public class Draggable : MonoBehaviour
+public class Draggable : SerializedMonoBehaviour
 {
+    [Header("Grid")]
+    [SerializeField] bool[,] grid = new bool[5, 5];
+
     Vector3 mouseOffset = Vector2.zero;
 
     bool isMouseOver = false;
