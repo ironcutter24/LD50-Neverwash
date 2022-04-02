@@ -8,13 +8,14 @@ public class Draggable : SerializedMonoBehaviour
     [Header("Grid")]
     [SerializeField] bool[,] grid = new bool[5, 5];
 
-    public static Draggable current = null;
-
-    Vector3 mouseOffset = Vector2.zero;
+    private static Draggable current = null;
+    public static Draggable Current { get { return current; } }
 
     bool isMouseOver = false;
-
+    Vector3 mouseOffset = Vector2.zero;
     Vector3 startPosition = Vector3.zero;
+
+    Vector2Int? gridPos = null;
 
     private void Start()
     {
@@ -59,8 +60,13 @@ public class Draggable : SerializedMonoBehaviour
         {
             if (Sink.IsMouseOver && !HasCollision())
             {
+                //if (gridPos != null)
+                //    Sink.RemoveFromGrid((Vector2)gridPos, grid);
+
                 startPosition = Sink.GridToWorldPosition;
                 transform.position = startPosition;
+                gridPos = Sink.DraggedPosInGrid;
+                Sink.InsertInGrid((Vector2)gridPos, grid);
                 return;
             }
             else
@@ -91,7 +97,7 @@ public class Draggable : SerializedMonoBehaviour
                     if (grid[x, 4-y] && Sink.Grid[x + cc.x - 2, y + cc.y - 2] > 0)
                         return true;
                 }
-                catch
+                catch //(System.IndexOutOfRangeException e)
                 {
                     if (grid[x, 4-y] == true)
                         return true;

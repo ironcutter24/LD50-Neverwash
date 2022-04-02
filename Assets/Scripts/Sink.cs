@@ -40,7 +40,7 @@ public class Sink : Singleton<Sink>
     {
         get
         {
-            var pos = Draggable.current.transform.position - UVector.New(_instance.bounds.xMin, _instance.bounds.yMin, 0f);
+            var pos = Draggable.Current.transform.position - UVector.New(_instance.bounds.xMin, _instance.bounds.yMin, 0f);
             return new Vector2Int((int)pos.x, (int)pos.y);
         }
     }
@@ -51,13 +51,34 @@ public class Sink : Singleton<Sink>
         bounds = new Rect(PosX, PosY, SizeX, SizeY);
     }
 
-    public static void InsertInGrid()
+    public static void InsertInGrid(Vector2 gridPos, bool[,] matrix)
     {
-
+        EditGrid(gridPos, matrix, 1);
     }
 
-    public static void RemoveFromGrid()
+    public static void RemoveFromGrid(Vector2 gridPos, bool[,] matrix)
     {
+        EditGrid(gridPos, matrix, 0);
+    }
 
+    private static void EditGrid(Vector2 gridPos, bool[,] matrix, int edit)
+    {
+        Vector2Int cc = new Vector2Int((int)gridPos.x, (int)gridPos.y);
+
+        for (int y = 0; y < 5; y++)
+        {
+            for (int x = 0; x < 5; x++)
+            {
+                try
+                {
+                    if (matrix[x, 4 - y] == true)
+                        Sink.Grid[x + cc.x - 2, y + cc.y - 2] = edit;
+                }
+                catch //(System.IndexOutOfRangeException e)
+                {
+
+                }
+            }
+        }
     }
 }
