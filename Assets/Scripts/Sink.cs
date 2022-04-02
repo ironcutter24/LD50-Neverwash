@@ -59,44 +59,4 @@ public class Sink : Singleton<Sink>
     {
 
     }
-    
-    /*
-    T[,] RotateMatrix<T>(T[,] matrix, int signedRotation)
-    {
-        
-    }
-    
-    */
-    T[,] Transpose<T>(T[,] matrix)
-    {
-        T[,] transposed = new T[5, 5];
-        for (int y = 0; y < 5; y++)
-        {
-            for (int x = 0; x < 5; x++)
-                transposed[y, x] = matrix[x, y];
-        }
-        return transposed;
-    }
-
-    T[,] InvertRows<T>(T[,] matrix)
-    {
-        T[,] inverted = new T[5, 5];
-        for (int y = 0; y < 5; y++)
-        {
-            for (int x = 0; x < 5; x++)
-                inverted[5 - x, y] = matrix[x, y];
-        }
-        return inverted;
-    }
-
-    T[,] InvertColumns<T>(T[,] matrix)
-    {
-        T[,] inverted = new T[5, 5];
-        for (int x = 0; x < 5; x++)
-        {
-            for (int y = 0; y < 5; y++)
-                inverted[x, 5 - y] = matrix[x, y];
-        }
-        return inverted;
-    }
 }
