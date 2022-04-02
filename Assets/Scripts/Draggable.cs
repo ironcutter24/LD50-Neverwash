@@ -49,6 +49,9 @@ public class Draggable : SerializedMonoBehaviour
             newRotation = rotation;
             mouseOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             current = this;
+
+            if (gridPos != null)
+                Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
         }
     }
 
@@ -77,6 +80,7 @@ public class Draggable : SerializedMonoBehaviour
             }
             else
             {
+                Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
                 SetRotation(rotation);
                 transform.position = startPosition;
             }
