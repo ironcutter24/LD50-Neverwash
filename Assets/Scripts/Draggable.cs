@@ -80,7 +80,9 @@ public class Draggable : SerializedMonoBehaviour
             }
             else
             {
-                Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+                if (gridPos != null)
+                    Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+
                 SetRotation(rotation);
                 transform.position = startPosition;
             }
@@ -112,12 +114,12 @@ public class Draggable : SerializedMonoBehaviour
             {
                 try
                 {
-                    if (grid[x, 4-y] && Sink.Grid[x + cc.x - 2, y + cc.y - 2] > 0)
+                    if (grid[x, 4 - y] && Sink.Grid[x + cc.x - 2, y + cc.y - 2] > 0)
                         return true;
                 }
                 catch //(System.IndexOutOfRangeException e)
                 {
-                    if (grid[x, 4-y] == true)
+                    if (grid[x, 4 - y] == true)
                         return true;
                 }
             }
