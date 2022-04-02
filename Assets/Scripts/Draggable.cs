@@ -16,6 +16,8 @@ public class Draggable : SerializedMonoBehaviour
     Vector3 startPosition = Vector3.zero;
 
     Vector2Int? gridPos = null;
+    int rotation = 0;
+    int newRotation = 0;
 
     private void Start()
     {
@@ -44,6 +46,7 @@ public class Draggable : SerializedMonoBehaviour
     {
         if (isMouseOver)
         {
+            newRotation = rotation;
             mouseOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             current = this;
         }
@@ -58,19 +61,25 @@ public class Draggable : SerializedMonoBehaviour
     {
         if (current == this)
         {
-            if (Sink.IsMouseOver && !HasCollision())
+            if (Sink.IsMouseOver && !HasCollision(UMatrix.RotateMatrix(grid, newRotation)))
             {
-                //if (gridPos != null)
-                //    Sink.RemoveFromGrid((Vector2)gridPos, grid);
+                if (gridPos != null)
+                    Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
 
                 startPosition = Sink.GridToWorldPosition;
                 transform.position = startPosition;
+
+                rotation = newRotation;
+                SetRotation(rotation);
+
                 gridPos = Sink.DraggedPosInGrid;
-                Sink.InsertInGrid((Vector2)gridPos, grid);
-                return;
+                Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
             }
             else
+            {
+                SetRotation(rotation);
                 transform.position = startPosition;
+            }
 
             current = null;
         }
@@ -78,13 +87,18 @@ public class Draggable : SerializedMonoBehaviour
 
     #endregion
 
-    public void Rotate(int signedRotation)
+    public void PreviewRotation(int signedRotation)
     {
-        transform.Rotate(0f, 0f, -90f * signedRotation);
-        grid = UMatrix.RotateMatrix(grid, signedRotation);
+        newRotation += signedRotation;
+        SetRotation(newRotation);
     }
 
-    bool HasCollision()
+    private void SetRotation(int signedRotation)
+    {
+        transform.rotation = Quaternion.Euler(0f, 0f, -90f * signedRotation);
+    }
+
+    bool HasCollision(bool[,] grid)
     {
         Vector2Int cc = Sink.DraggedPosInGrid;
 

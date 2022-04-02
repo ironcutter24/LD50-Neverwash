@@ -10,8 +10,8 @@ public class InputManager : MonoBehaviour
     {
         if(Draggable.Current != null)
         {
-            if (Input.GetKeyDown(KeyCode.Q)) Draggable.Current.Rotate(-1);
-            if (Input.GetKeyDown(KeyCode.E)) Draggable.Current.Rotate(1);
+            if (Input.GetKeyDown(KeyCode.Q)) Draggable.Current.PreviewRotation(-1);
+            if (Input.GetKeyDown(KeyCode.E)) Draggable.Current.PreviewRotation(1);
         }
     }
 }
