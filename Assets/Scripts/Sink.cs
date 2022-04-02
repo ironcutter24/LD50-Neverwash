@@ -6,11 +6,12 @@ using Utility.Patterns;
 
 public class Sink : Singleton<Sink>
 {
-    static int width = 10;
-    static int height = 6;
+    static int width = 16;
+    static int height = 8;
 
     [Header("Grid")]
     [SerializeField] int[,] grid = new int[width, height];
+    public static int[,] Grid { get { return _instance.grid; } }
 
     Rect bounds;
     public static Rect Bounds { get { return _instance.bounds; } }

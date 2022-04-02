@@ -50,7 +50,6 @@ public class Draggable : SerializedMonoBehaviour
 
     private void OnMouseDrag()
     {
-        //Debug.Log("Dragging...");
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + mouseOffset;
     }
 
@@ -58,12 +57,11 @@ public class Draggable : SerializedMonoBehaviour
     {
         if (current == this)
         {
-            if (Sink.IsMouseOver)
+            if (Sink.IsMouseOver && !HasCollision())
             {
                 startPosition = Sink.GridToWorldPosition;
                 transform.position = startPosition;
-
-
+                return;
             }
             else
                 transform.position = startPosition;
@@ -73,4 +71,33 @@ public class Draggable : SerializedMonoBehaviour
     }
 
     #endregion
+
+    public void Rotate(int signedRotation)
+    {
+        transform.Rotate(0f, 0f, -90f * signedRotation);
+        grid = UMatrix.RotateMatrix(grid, signedRotation);
+    }
+
+    bool HasCollision()
+    {
+        Vector2Int cc = Sink.DraggedPosInGrid;
+
+        for (int y = 0; y < 5; y++)
+        {
+            for (int x = 0; x < 5; x++)
+            {
+                try
+                {
+                    if (grid[x, 4-y] && Sink.Grid[x + cc.x - 2, y + cc.y - 2] > 0)
+                        return true;
+                }
+                catch
+                {
+                    if (grid[x, 4-y] == true)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 }
