@@ -8,10 +8,11 @@ public class Draggable : SerializedMonoBehaviour
     [Header("Grid")]
     [SerializeField] bool[,] grid = new bool[5, 5];
 
+    public static Draggable current = null;
+
     Vector3 mouseOffset = Vector2.zero;
 
     bool isMouseOver = false;
-    bool isDragged = false;
 
     Vector3 startPosition = Vector3.zero;
 
@@ -24,7 +25,7 @@ public class Draggable : SerializedMonoBehaviour
 
     private void OnMouseEnter()
     {
-        transform.localScale = Vector3.one * 1.04f;
+        transform.localScale = Vector3.one * 1.08f;
         isMouseOver = true;
     }
 
@@ -43,7 +44,7 @@ public class Draggable : SerializedMonoBehaviour
         if (isMouseOver)
         {
             mouseOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            isDragged = true;
+            current = this;
         }
     }
 
@@ -55,17 +56,19 @@ public class Draggable : SerializedMonoBehaviour
 
     private void OnMouseUp()
     {
-        if (isDragged)
+        if (current == this)
         {
             if (Sink.IsMouseOver)
             {
                 startPosition = Sink.GridToWorldPosition;
                 transform.position = startPosition;
+
+
             }
             else
                 transform.position = startPosition;
 
-            isDragged = false;
+            current = null;
         }
     }
 
