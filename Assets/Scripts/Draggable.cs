@@ -24,11 +24,6 @@ public class Draggable : MonoBehaviour
         isMouseOver = true;
     }
 
-    private void OnMouseOver()
-    {
-        Debug.Log("Mouse is over GameObject.");
-    }
-
     private void OnMouseExit()
     {
         transform.localScale = Vector3.one;
@@ -50,8 +45,7 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log("Dragging...");
-
+        //Debug.Log("Dragging...");
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + mouseOffset;
     }
 

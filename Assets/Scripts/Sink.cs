@@ -12,13 +12,14 @@ public class Sink : Singleton<Sink>
     int[,] field = new int[width, height];
 
     Rect bounds;
+    public static Rect Bounds { get { return _instance.bounds; } }
     
 
     int PosX { get { return (int)(transform.position.x - transform.localScale.x * .5f); } }
     int PosY { get { return (int)(transform.position.y - transform.localScale.y * .5f); } }
 
-    int SizeX { get { return (int)(transform.localScale.x); } }
-    int SizeY { get { return (int)(transform.localScale.y); } }
+    public static int SizeX { get { return (int)(_instance.transform.localScale.x); } }
+    public static int SizeY { get { return (int)(_instance.transform.localScale.y); } }
 
     public static bool IsMouseOver { get { return _instance.bounds.Contains(InputManager.PointerPos); } }
 
@@ -39,8 +40,9 @@ public class Sink : Singleton<Sink>
         }
     }
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         bounds = new Rect(PosX, PosY, SizeX, SizeY);
     }
 }
