@@ -222,7 +222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &179659432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1200,9 +1200,13 @@ MonoBehaviour:
   timerText: {fileID: 2129887817}
   gameOverPanel: {fileID: 179659431}
   objPrefabs:
-  - {fileID: 2132943951115859522, guid: ee4f1970befd60748b871b8f1ce56223, type: 3}
-  - {fileID: 279374753524693352, guid: db39c673486283145b22c42f507d9cf2, type: 3}
-  - {fileID: 7357032752540029917, guid: fbaf4a53c07cbf9498cc901919979ef3, type: 3}
+  - {fileID: 3841258927609694818, guid: 716bc58cf2dc85942af2a80ec476e6fc, type: 3}
+  - {fileID: 2912088953521783221, guid: 20476178cdc00ba499671f421c6fcaa5, type: 3}
+  - {fileID: 5423389308389743293, guid: 50b4ea0e4e8c0d248aaffda9aedd3f76, type: 3}
+  - {fileID: 5609508054790851103, guid: d8dcc7564358eff4aaaec8901f01a1f4, type: 3}
+  - {fileID: 6336375657257963134, guid: ada69da176356a243a199ce74a709527, type: 3}
+  - {fileID: 8123353377657538129, guid: 1701f447a58bf15438dc6c0cb25c347a, type: 3}
+  - {fileID: 8140022010402754707, guid: 35d5eec43d81efb46875bbc6a478d6fb, type: 3}
 --- !u!4 &1554401531
 Transform:
   m_ObjectHideFlags: 0
