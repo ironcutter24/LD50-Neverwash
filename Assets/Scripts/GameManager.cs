@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility;
 using Utility.Patterns;
 using TMPro;
@@ -9,10 +10,17 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] Transform spawnPoint;
     [SerializeField] TextMeshProUGUI timerText;
+
+    [Header("UI Panels")]
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] TextMeshProUGUI rankText;
+    [SerializeField] TextMeshProUGUI timeElapsedText;
+
+    [Header("Objects")]
     [SerializeField] GameObject washGelPrefab;
     [SerializeField] List<GameObject> objPrefabs = new List<GameObject>();
 
+    [Header("Game Balance")]
     [SerializeField] int bonusObjSpawnRate = 8;
     int spawnsFromLastBonusObj;
 
@@ -38,7 +46,10 @@ public class GameManager : Singleton<GameManager>
             SetTimerGfx(timer.RemainingTime);
 
         if (timer.IsExpired)
-            gameOverPanel.SetActive(true);
+            SetGameOver();
+
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene("MainScene");
     }
 
     public static void ResetTimer()
@@ -78,6 +89,36 @@ public class GameManager : Singleton<GameManager>
         string FormatNum(int num)
         {
             return (num > 9 ? "" : "0") + num.ToString();
+        }
+    }
+
+    void SetGameOver()
+    {
+        gameOverPanel.SetActive(true);
+
+        float gameTime = Time.timeSinceLevelLoad;
+
+        rankText.text = "Procrastination rank:\n" + GetRank(gameTime);
+        timeElapsedText.text = GetFormatted(gameTime);
+
+        string GetRank(float time)
+        {
+            int rank = (int)(time / 60);
+
+            switch (rank)
+            {
+                case 0: return "Newbie";
+                case 1: return "Hobbist";
+                case 2: return "Expert";
+                case 3: return "Pro";
+
+                default: return "Master";
+            }
+        }
+
+        string GetFormatted(float time)
+        {
+            return "";
         }
     }
 }
