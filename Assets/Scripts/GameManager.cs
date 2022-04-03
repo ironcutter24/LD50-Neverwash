@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
 
     Timer timer = new Timer();
 
-    const float initTime = 20f;
+    [SerializeField] float initTime = 20f;
     [SerializeField] float bonusTime = 5f;
 
     private void Start()

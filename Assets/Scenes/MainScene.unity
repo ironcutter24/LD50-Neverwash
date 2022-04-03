@@ -1615,6 +1615,7 @@ MonoBehaviour:
   - {fileID: 6336375657257963134, guid: ada69da176356a243a199ce74a709527, type: 3}
   - {fileID: 8123353377657538129, guid: 1701f447a58bf15438dc6c0cb25c347a, type: 3}
   bonusObjSpawnRate: 7
+  initTime: 10
   bonusTime: 2.5
 --- !u!4 &1554401531
 Transform:
@@ -2121,7 +2122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:20
+  m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
