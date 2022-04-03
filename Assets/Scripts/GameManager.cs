@@ -27,6 +27,9 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
         if(timer.RemainingTime >= 0f)
             SetTimerGfx(timer.RemainingTime);
 

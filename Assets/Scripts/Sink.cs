@@ -6,7 +6,7 @@ using Utility.Patterns;
 
 public class Sink : Singleton<Sink>
 {
-    static int width = 16;
+    static int width = 10;
     static int height = 8;
 
     [Header("Grid")]
