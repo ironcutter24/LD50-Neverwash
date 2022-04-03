@@ -1199,6 +1199,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 512441488}
   timerText: {fileID: 2129887817}
   gameOverPanel: {fileID: 179659431}
+  washGelPrefab: {fileID: 8140022010402754707, guid: 35d5eec43d81efb46875bbc6a478d6fb, type: 3}
   objPrefabs:
   - {fileID: 3841258927609694818, guid: 716bc58cf2dc85942af2a80ec476e6fc, type: 3}
   - {fileID: 2912088953521783221, guid: 20476178cdc00ba499671f421c6fcaa5, type: 3}
@@ -1206,7 +1207,6 @@ MonoBehaviour:
   - {fileID: 5609508054790851103, guid: d8dcc7564358eff4aaaec8901f01a1f4, type: 3}
   - {fileID: 6336375657257963134, guid: ada69da176356a243a199ce74a709527, type: 3}
   - {fileID: 8123353377657538129, guid: 1701f447a58bf15438dc6c0cb25c347a, type: 3}
-  - {fileID: 8140022010402754707, guid: 35d5eec43d81efb46875bbc6a478d6fb, type: 3}
 --- !u!4 &1554401531
 Transform:
   m_ObjectHideFlags: 0

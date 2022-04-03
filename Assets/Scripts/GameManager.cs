@@ -10,7 +10,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] Transform spawnPoint;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject washGelPrefab;
     [SerializeField] List<GameObject> objPrefabs = new List<GameObject>();
+
+    int spawnsFromLastBonusObj;
+    const int bonusObjSpawnRate = 10;
 
     Timer timer = new Timer();
 
@@ -45,8 +49,18 @@ public class GameManager : Singleton<GameManager>
 
     void InstantiateRandomObj()
     {
-        int index = Random.Range(0, objPrefabs.Count);
-        Instantiate(objPrefabs[index], spawnPoint.position, Quaternion.identity);
+        spawnsFromLastBonusObj++;
+
+        if (spawnsFromLastBonusObj < bonusObjSpawnRate)
+        {
+            int index = Random.Range(0, objPrefabs.Count);
+            Instantiate(objPrefabs[index], spawnPoint.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(washGelPrefab, spawnPoint.position, Quaternion.identity);
+            spawnsFromLastBonusObj = 0;
+        }
     }
 
     void SetTimerGfx(float time)
