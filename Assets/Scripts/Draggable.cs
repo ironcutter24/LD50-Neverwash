@@ -68,6 +68,8 @@ public class Draggable : SerializedMonoBehaviour
             {
                 if (gridPos != null)
                     Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+                else
+                    GameManager.ResetTimer();
 
                 startPosition = Sink.GridToWorldPosition;
                 transform.position = startPosition;
