@@ -18,6 +18,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Objects")]
     [SerializeField] GameObject washGelPrefab;
+    [SerializeField] GameObject easterEggPrefab;
     [SerializeField] List<GameObject> objPrefabs = new List<GameObject>();
 
     [Header("Game Balance")]
@@ -67,6 +68,12 @@ public class GameManager : Singleton<GameManager>
 
         if (spawnsFromLastBonusObj < bonusObjSpawnRate)
         {
+            if(Random.Range(0, 100) == 0)
+            {
+                Instantiate(easterEggPrefab, spawnPoint.position, Quaternion.identity);
+                return;
+            }
+
             int index = Random.Range(0, objPrefabs.Count);
             Instantiate(objPrefabs[index], spawnPoint.position, Quaternion.identity);
         }
