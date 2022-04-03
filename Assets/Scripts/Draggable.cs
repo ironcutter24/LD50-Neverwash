@@ -21,8 +21,13 @@ public class Draggable : SerializedMonoBehaviour
     int rotation = 0;
     int newRotation = 0;
 
+    SpriteRenderer sprite;
+    int spriteDryLayer = 0;
+    int spriteWetLayer = -5;
+
     private void Start()
     {
+        sprite = GetComponentInChildren<SpriteRenderer>();
         startPosition = transform.position;
     }
 
@@ -30,6 +35,9 @@ public class Draggable : SerializedMonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (GameManager.IsGameOver)
+            return;
+
         transform.localScale = Vector3.one * 1.08f;
         isMouseOver = true;
     }
@@ -46,7 +54,7 @@ public class Draggable : SerializedMonoBehaviour
 
     private void OnMouseDown()
     {
-        if (isMouseOver)
+        if (isMouseOver && !GameManager.IsGameOver)
         {
             newRotation = rotation;
             mouseOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -54,12 +62,15 @@ public class Draggable : SerializedMonoBehaviour
 
             if (gridPos != null)
                 Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+
+            sprite.sortingOrder = spriteDryLayer;
         }
     }
 
     private void OnMouseDrag()
     {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + mouseOffset;
+        if (!GameManager.IsGameOver)
+            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + mouseOffset;
     }
 
     private void OnMouseUp()
@@ -86,6 +97,8 @@ public class Draggable : SerializedMonoBehaviour
 
                 if (isBonusItem)
                     ApplyBonusEffect(startPosition);
+
+                sprite.sortingOrder = spriteWetLayer;
             }
             else
             {

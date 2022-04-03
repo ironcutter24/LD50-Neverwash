@@ -25,6 +25,7 @@ public class GameManager : Singleton<GameManager>
     int spawnsFromLastBonusObj;
 
     bool isGameOver = false;
+    public static bool IsGameOver { get { return _instance.isGameOver; } }
 
     Timer timer = new Timer();
 

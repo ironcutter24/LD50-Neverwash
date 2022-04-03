@@ -58,14 +58,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.2829233, y: 0.33869928}
-      - {x: -1.3081589, y: -0.36550984}
-      - {x: -0.42907307, y: -0.3593326}
-      - {x: -0.34680358, y: -2.3552752}
-      - {x: 0.33747628, y: -2.341489}
-      - {x: 0.358423, y: -0.41259822}
-      - {x: 1.2094079, y: -0.38578448}
-      - {x: 1.2288027, y: 0.36192113}
+    - - {x: -1.2829233, y: 1.3386993}
+      - {x: -1.3081589, y: 0.6344902}
+      - {x: -0.42907307, y: 0.6406674}
+      - {x: -0.34680358, y: -1.355275}
+      - {x: 0.33747628, y: -1.341489}
+      - {x: 0.358423, y: 0.5874018}
+      - {x: 1.2094079, y: 0.6142155}
+      - {x: 1.2288027, y: 1.3619211}
 --- !u!114 &3841258927609694819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,9 +116,6 @@ MonoBehaviour:
       Data: false
     - Name: 
       Entry: 5
-      Data: false
-    - Name: 
-      Entry: 5
       Data: true
     - Name: 
       Entry: 5
@@ -150,6 +147,9 @@ MonoBehaviour:
     - Name: 
       Entry: 5
       Data: true
+    - Name: 
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 5
       Data: false
@@ -177,6 +177,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  isBonusItem: 0
 --- !u!1 &3841258927931295261
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3841258927931295261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: -0.77, z: 0}
+  m_LocalPosition: {x: 0.11, y: 0.23, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3841258927609694821}

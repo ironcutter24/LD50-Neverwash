@@ -6,8 +6,8 @@ using Utility.Patterns;
 
 public class Sink : Singleton<Sink>
 {
-    static int width = 10;
-    static int height = 8;
+    static int width = 8;
+    static int height = 6;
 
     [Header("Grid")]
     [SerializeField] int[,] grid = new int[width, height];
