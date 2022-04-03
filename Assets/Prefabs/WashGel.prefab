@@ -4978,6 +4978,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  isBonusItem: 1
 --- !u!1 &8140022011069081791
 GameObject:
   m_ObjectHideFlags: 0

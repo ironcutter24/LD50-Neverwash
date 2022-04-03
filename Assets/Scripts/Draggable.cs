@@ -5,6 +5,8 @@ using Sirenix.OdinInspector;
 
 public class Draggable : SerializedMonoBehaviour
 {
+    [SerializeField] bool isBonusItem = false;
+
     [Header("Grid")]
     [SerializeField] bool[,] grid = new bool[5, 5];
 
@@ -66,6 +68,8 @@ public class Draggable : SerializedMonoBehaviour
         {
             if (Sink.IsMouseOver && !HasCollision(UMatrix.RotateMatrix(grid, newRotation)))
             {
+                // Can place
+
                 if (gridPos != null)
                     Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
                 else
@@ -79,9 +83,14 @@ public class Draggable : SerializedMonoBehaviour
 
                 gridPos = Sink.DraggedPosInGrid;
                 Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+
+                if (isBonusItem)
+                    ApplyBonusEffect(startPosition);
             }
             else
             {
+                // Cannot place
+
                 if (gridPos != null)
                     Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
 
@@ -94,6 +103,21 @@ public class Draggable : SerializedMonoBehaviour
     }
 
     #endregion
+
+    void ApplyBonusEffect(Vector2 pos)
+    {
+        var colliders = Physics2D.OverlapBoxAll(pos, new Vector2(2.8f, 2.8f), 0f);
+
+        foreach(var c in colliders)
+        {
+            var obj = c.GetComponent<Draggable>();
+            if (obj != null)
+            {
+                Sink.RemoveFromGrid((Vector2)obj.gridPos, UMatrix.RotateMatrix(obj.grid, obj.rotation));
+                Destroy(obj.gameObject);
+            }
+        }
+    }
 
     public void PreviewRotation(int signedRotation)
     {

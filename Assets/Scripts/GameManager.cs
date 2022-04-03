@@ -13,13 +13,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject washGelPrefab;
     [SerializeField] List<GameObject> objPrefabs = new List<GameObject>();
 
+    [SerializeField] int bonusObjSpawnRate = 8;
     int spawnsFromLastBonusObj;
-    const int bonusObjSpawnRate = 10;
 
     Timer timer = new Timer();
 
     const float initTime = 20f;
-    const float bonusTime = 5f;
+    [SerializeField] float bonusTime = 5f;
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class GameManager : Singleton<GameManager>
 
     public static void ResetTimer()
     {
-        _instance.timer.Set(bonusTime + _instance.timer.RemainingTime);
+        _instance.timer.Set(_instance.bonusTime + _instance.timer.RemainingTime);
         _instance.InstantiateRandomObj();
     }
 
