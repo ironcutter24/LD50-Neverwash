@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] int bonusObjSpawnRate = 8;
     int spawnsFromLastBonusObj;
 
+    bool isGameOver = false;
+
     Timer timer = new Timer();
 
     const float initTime = 20f;
@@ -45,7 +47,7 @@ public class GameManager : Singleton<GameManager>
         if(timer.RemainingTime >= 0f)
             SetTimerGfx(timer.RemainingTime);
 
-        if (timer.IsExpired)
+        if (!isGameOver && timer.IsExpired)
             SetGameOver();
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -103,6 +105,7 @@ public class GameManager : Singleton<GameManager>
 
         string GetRank(float time)
         {
+            isGameOver = true;
             int rank = (int)(time / 60);
 
             switch (rank)
@@ -118,7 +121,9 @@ public class GameManager : Singleton<GameManager>
 
         string GetFormatted(float time)
         {
-            return "";
+            int dd = (int)(time / 60);
+            int hh = (int)Mathf.Lerp(0, 23, (time - dd*60) / 60);
+            return "You lasted " + dd + " days and " + hh + " hours";
         }
     }
 }
