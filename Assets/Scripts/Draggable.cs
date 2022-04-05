@@ -105,7 +105,10 @@ public class Draggable : SerializedMonoBehaviour
                 // Cannot place
 
                 if (gridPos != null)
+                {
                     Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+                    sprite.sortingOrder = spriteWetLayer;
+                }
 
                 SetRotation(rotation);
                 transform.position = startPosition;
