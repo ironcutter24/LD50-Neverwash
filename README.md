@@ -4,6 +4,3 @@
 
 Delay the inevitable dish washing!  
 Game made in 48 hours for Ludum Dare 50.  
-
-- Download -> [itch.io](https://ironcutter24.itch.io/neverwash)
-- Jam [page](https://ldjam.com/events/ludum-dare/50/neverwash)
