@@ -177,6 +177,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  objectID: 1
   isBonusItem: 0
 --- !u!1 &3841258927931295261
 GameObject:

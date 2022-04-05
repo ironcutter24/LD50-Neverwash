@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
-public class Draggable : SerializedMonoBehaviour
+public class Draggable : MonoBehaviour
 {
+    [SerializeField] ObjectMatrices.ObjectID objectID;
+
     [SerializeField] bool isBonusItem = false;
 
-    [Header("Grid")]
-    [SerializeField] bool[,] grid = new bool[5, 5];
+    bool[,] grid = new bool[5, 5];
 
     private static Draggable current = null;
     public static Draggable Current { get { return current; } }
@@ -24,6 +24,11 @@ public class Draggable : SerializedMonoBehaviour
     SpriteRenderer sprite;
     int spriteDryLayer = 0;
     int spriteWetLayer = -5;
+
+    private void Awake()
+    {
+        grid = ObjectMatrices.GetMatrix(objectID); 
+    }
 
     private void Start()
     {

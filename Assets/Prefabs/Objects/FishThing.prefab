@@ -260,3 +260,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  objectID: 4
+  isBonusItem: 0
