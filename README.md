@@ -16,4 +16,9 @@
 - R **>>** Restart  
 - Esc **>>** Quit
 
+### Links:
+- Play HTML5 version on [itch.io](http://ironcutter24.itch.io/neverwash)
+- Download for Windows on [itch.io](http://ironcutter24.itch.io/neverwash)
+- Vote on [ldjam.com](https://ldjam.com/events/ludum-dare/50/neverwash)
+
 ##### Game made in 48 hours for Ludum Dare 50
