@@ -149,6 +149,7 @@ public class Draggable : MonoBehaviour
     private void SetRotation(int signedRotation)
     {
         transform.rotation = Quaternion.Euler(0f, 0f, -90f * signedRotation);
+        //mouseOffset = Quaternion.AngleAxis(-90f * signedRotation, Vector3.forward) * mouseOffset;
     }
 
     bool HasCollision(bool[,] grid)
