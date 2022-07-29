@@ -66,7 +66,7 @@ public class Draggable : MonoBehaviour
             current = this;
 
             if (gridPos != null)
-                Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+                Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.Rotate(grid, rotation));
 
             sprite.sortingOrder = spriteDryLayer;
         }
@@ -82,12 +82,12 @@ public class Draggable : MonoBehaviour
     {
         if (current == this)
         {
-            if (Sink.IsMouseOver && !HasCollision(UMatrix.RotateMatrix(grid, newRotation)))
+            if (Sink.IsMouseOver && !HasCollision(UMatrix.Rotate(grid, newRotation)))
             {
                 // Can place
 
                 if (gridPos != null)
-                    Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+                    Sink.RemoveFromGrid((Vector2)gridPos, UMatrix.Rotate(grid, rotation));
                 else
                     GameManager.ResetTimer();
 
@@ -98,7 +98,7 @@ public class Draggable : MonoBehaviour
                 SetRotation(rotation);
 
                 gridPos = Sink.DraggedPosInGrid;
-                Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+                Sink.InsertInGrid((Vector2)gridPos, UMatrix.Rotate(grid, rotation));
 
                 if (isBonusItem)
                     ApplyBonusEffect(startPosition);
@@ -111,7 +111,7 @@ public class Draggable : MonoBehaviour
 
                 if (gridPos != null)
                 {
-                    Sink.InsertInGrid((Vector2)gridPos, UMatrix.RotateMatrix(grid, rotation));
+                    Sink.InsertInGrid((Vector2)gridPos, UMatrix.Rotate(grid, rotation));
                     sprite.sortingOrder = spriteWetLayer;
                 }
 
@@ -134,7 +134,7 @@ public class Draggable : MonoBehaviour
             var obj = c.GetComponent<Draggable>();
             if (obj != null)
             {
-                Sink.RemoveFromGrid((Vector2)obj.gridPos, UMatrix.RotateMatrix(obj.grid, obj.rotation));
+                Sink.RemoveFromGrid((Vector2)obj.gridPos, UMatrix.Rotate(obj.grid, obj.rotation));
                 Destroy(obj.gameObject);
             }
         }
