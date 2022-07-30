@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
-        if(timer.RemainingTime >= 0f)
+        if (timer.RemainingTime >= 0f)
             SetTimerGfx(timer.RemainingTime);
 
         if (!isGameOver && timer.IsExpired)
@@ -68,7 +68,7 @@ public class GameManager : Singleton<GameManager>
 
         if (spawnsFromLastBonusObj < bonusObjSpawnRate)
         {
-            if(Random.Range(0, 100) == 0)
+            if (Random.Range(0, 100) == 0)
             {
                 Instantiate(easterEggPrefab, spawnPoint.position, Quaternion.identity);
                 return;
@@ -102,8 +102,13 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    [SerializeField] bool endlessMode = false;
     void SetGameOver()
     {
+#if(UNITY_EDITOR)
+        if (endlessMode) return;
+#endif
+
         gameOverPanel.SetActive(true);
 
         float gameTime = Time.timeSinceLevelLoad;
@@ -130,7 +135,7 @@ public class GameManager : Singleton<GameManager>
         string GetFormatted(float time)
         {
             int dd = (int)(time / 60);
-            int hh = (int)Mathf.Lerp(0, 23, (time - dd*60) / 60);
+            int hh = (int)Mathf.Lerp(0, 23, (time - dd * 60) / 60);
             return "You lasted " + dd + " days and " + hh + " hours";
         }
     }

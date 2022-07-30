@@ -14,7 +14,8 @@ public class Draggable : MonoBehaviour
     public static Draggable Current { get { return current; } }
 
     bool isMouseOver = false;
-    Vector3 mouseOffset = Vector2.zero;
+    Vector3 startMouseOffset = Vector3.zero;
+    Vector3 currentMouseOffset = Vector2.zero;
     Vector3 startPosition = Vector3.zero;
 
     Vector2Int? gridPos = null;
@@ -27,7 +28,7 @@ public class Draggable : MonoBehaviour
 
     private void Awake()
     {
-        grid = ObjectMatrices.GetMatrix(objectID); 
+        grid = ObjectMatrices.GetMatrix(objectID);
     }
 
     private void Start()
@@ -62,7 +63,8 @@ public class Draggable : MonoBehaviour
         if (isMouseOver && !GameManager.IsGameOver)
         {
             newRotation = rotation;
-            mouseOffset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            startMouseOffset = transform.position - GetMousePos();
+            currentMouseOffset = startMouseOffset;
             current = this;
 
             if (gridPos != null)
@@ -75,7 +77,7 @@ public class Draggable : MonoBehaviour
     private void OnMouseDrag()
     {
         if (!GameManager.IsGameOver)
-            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + mouseOffset;
+            transform.position = GetMousePos() + currentMouseOffset;
     }
 
     private void OnMouseUp()
@@ -118,7 +120,6 @@ public class Draggable : MonoBehaviour
                 SetRotation(rotation);
                 transform.position = startPosition;
             }
-
             current = null;
         }
     }
@@ -129,7 +130,7 @@ public class Draggable : MonoBehaviour
     {
         var colliders = Physics2D.OverlapBoxAll(pos, new Vector2(2.8f, 2.8f), 0f);
 
-        foreach(var c in colliders)
+        foreach (var c in colliders)
         {
             var obj = c.GetComponent<Draggable>();
             if (obj != null)
@@ -144,12 +145,13 @@ public class Draggable : MonoBehaviour
     {
         newRotation += signedRotation;
         SetRotation(newRotation);
+        transform.position = GetMousePos() + currentMouseOffset;
     }
 
     private void SetRotation(int signedRotation)
     {
         transform.rotation = Quaternion.Euler(0f, 0f, -90f * signedRotation);
-        //mouseOffset = Quaternion.AngleAxis(-90f * signedRotation, Vector3.forward) * mouseOffset;
+        currentMouseOffset = Quaternion.Euler(0f, 0f, -90f * signedRotation) * startMouseOffset;
     }
 
     bool HasCollision(bool[,] grid)
@@ -174,4 +176,21 @@ public class Draggable : MonoBehaviour
         }
         return false;
     }
+
+    Vector3 GetMousePos()
+    {
+        return GetXY(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+        Vector3 GetXY(Vector3 v)
+        {
+            return Utility.UVector.New(v.x, v.y, 0f);
+        }
+    }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawLine(GetMousePos(), GetMousePos() + currentMouseOffset);
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(GetMousePos(), GetMousePos() + startMouseOffset);
+    //}
 }
